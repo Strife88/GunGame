@@ -1,4 +1,47 @@
 
+//playerConstructor Object
+function PlayerCard(name, gun, team) {
+    this.ActionPoints = 12;
+    this.playerName = name;
+    this.isAlive = true;
+    this.gun = gun;
+    this.team = team;
+}
+
+//playerConstructorObjects
+var playerBlue1 = new PlayerCard("Player1","pistol", "Blue");
+var playerBlue2 = new PlayerCard("Player2","pistol", "Blue");
+var playerBlue3 = new PlayerCard("Player3","rifle", "Blue");
+var playerBlue4 = new PlayerCard("Player4","sniper", "Blue");
+
+var playerRed1 = new PlayerCard("Player1","pistol", "Red");
+var playerRed2 = new PlayerCard("Player1","pistol", "Red");
+var playerRed3 = new PlayerCard("Player1","rifle", "Red");
+var playerRed4 = new PlayerCard("Player1","sniper", "Red");
+
+
+//gunConstructor Object
+function Gun(actionPoints, hitChance, burstRound) {
+    this.ActionPoints = actionPoints;
+    this.hitChance = hitChance;
+    this.burstRound = burstRound;
+    this.burstHitChance = hitChance/burstRound + 10;
+}
+
+var rifle = new Gun("4", "40", 3);
+var pistol = new Gun("3","30",3);
+var sniper = new Gun("6","60");
+
+var MoveAction = {
+  Run: 4;
+  Hide: 4;
+  Defend: 8;
+}
+
+
+
+
+
 
 var pistol = {
  BurstRounds : 3,
