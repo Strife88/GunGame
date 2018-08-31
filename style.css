@@ -1,0 +1,61 @@
+* {
+    margin: 0;
+}
+:root {
+    --xxxs:2px;
+    --xxs:4px;
+    --xs:8px;
+    --s:12px;
+    --m:16px;
+    --l:24px;
+    --xl:32px;
+    --xxl:44px;
+    --xxxl:64px;
+    
+}
+h1 {
+    line-height: 28px;
+    font-size: 28px;
+}
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+.container > div+div {
+    margin-top: var(--l)
+}
+/* ProductCardStyle */
+.playerCard {
+    background: lightgrey;
+    flex-basis: content;
+    display: flex;
+    align-items: flex-start;
+    flex-direction: column;
+    padding:var(--l);
+}
+.playerCard>div {
+    display: flex;
+    align-items: flex-start;
+    flex-direction: row;
+}
+.playerCard>div+div {
+    margin-top: var(--m)
+}
+.Avatar {
+    background: black;
+    height: 40px;
+    width:40px;
+    margin-right: var(--m);
+}
+.ApGroup {
+    display:flex;
+    align-content: flex-start
+}
+.ApGroup h1 {
+    margin-left: var(--xxs);
+}
+
+.param div+div {
+    margin-left: var(--m)
+}

@@ -1,11 +1,12 @@
 
 //playerConstructor Object
 function PlayerCard(name, gun, team) {
-    this.ActionPoints = 12;
-    this.playerName = name;
-    this.isAlive = true;
-    this.gun = gun;
-    this.team = team;
+    this.isSelected = false;
+    this.ActionPoints = 12,
+    this.playerName = name,
+    this.isAlive = true,
+    this.gun = gun,
+    this.team = team
 }
 
 //playerConstructorObjects
@@ -33,16 +34,18 @@ var pistol = new Gun("3","30",3);
 var sniper = new Gun("6","60");
 
 var MoveAction = {
-  Run: 4;
-  Hide: 4;
-  Defend: 8;
+  Run: 4,
+  Hide: 4,
+  Defend: 8
 }
 
+//Selected Player - Class Active
+//If 
 
 
 
 
-
+/*
 var pistol = {
  BurstRounds : 3,
  ApCost : {
@@ -115,3 +118,4 @@ return(hit.length);
 }
 
 burst(30,hitChance);
+*/
