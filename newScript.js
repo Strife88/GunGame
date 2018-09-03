@@ -27,6 +27,8 @@ var playerRed2 = new PlayerCard("Player1", "pistol", "Red");
 var playerRed3 = new PlayerCard("Player1", "rifle", "Red");
 var playerRed4 = new PlayerCard("Player1", "sniper", "Red");
 
+var redArray = ['bug',playerRed1,playerRed2,playerRed3,playerRed4];
+
 //generate card from js objects
 
 var createTag = function(tag,classname,parent,text) {
@@ -43,8 +45,10 @@ var createTag = function(tag,classname,parent,text) {
      }
 };
 
+
+
 for(i=1;i < 5 ;i++)
-{
+{    
 createTag('div', 'playerCard', 'container');
 createTag('div', 'Ava-Info', 'playerCard');
 createTag('div', 'Avatar', 'Ava-Info');
@@ -63,6 +67,28 @@ createTag('div', 'status', 'param');
 createTag('span', '', 'status','stats');
 createTag('h3', 'status-Name', 'status',blueArray[i].status);    
 }
+
+for(i=1;i < 5 ;i++)
+{    
+createTag('div', 'playerCard', 'container-2');
+createTag('div', 'Ava-Info', 'playerCard');
+createTag('div', 'Avatar', 'Ava-Info');
+createTag('div', 'Main-Info', 'Ava-Info');
+createTag('div', 'ApGroup', 'Main-Info');
+createTag('span', '', 'ApGroup','AP');
+createTag('h1', '', 'ApGroup',redArray[i].ActionPoints);
+createTag('h3', 'playerName','Main-Info',redArray[i].playerName);
+    
+createTag('div', 'param', 'playerCard');
+createTag('div', 'gun-type', 'param'); 
+createTag('span', '', 'gun-type','gun');
+createTag('h3', 'gun-Name', 'gun-type',redArray[i].gun);
+    
+createTag('div', 'status', 'param');
+createTag('span', '', 'status','stats');
+createTag('h3', 'status-Name', 'status',redArray[i].status);    
+}
+
 //gunConstructor Object
 function Gun(actionPoints, hitChance, burstRound) {
     this.ActionPoints = actionPoints;

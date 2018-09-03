@@ -17,12 +17,12 @@ h1 {
     line-height: 28px;
     font-size: 28px;
 }
-.container {
+.container, .container-2 {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
 }
-.container > div+div {
+.container > div+div ,.container-2  > div+div {
     margin-top: var(--l)
 }
 /* ProductCardStyle */
