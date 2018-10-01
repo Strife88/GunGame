@@ -14,80 +14,94 @@ PlayerCard.prototype.AP = function() {
 
 
 //playerConstructorObjects
-var playerBlue1 = new PlayerCard("Player1", "pistol", "Blue");
-var playerBlue2 = new PlayerCard("Player2", "pistol", "Blue");
-var playerBlue3 = new PlayerCard("Player3", "rifle", "Blue");
-var playerBlue4 = new PlayerCard("Player4", "sniper", "Blue");
+var playerBlue1 = new PlayerCard("Tom", "pistol", "Blue");
+var playerBlue2 = new PlayerCard("Bom", "pistol", "Blue");
+var playerBlue3 = new PlayerCard("Jhon", "rifle", "Blue");
+var playerBlue4 = new PlayerCard("Michele", "sniper", "Blue");
 
-var blueArray = ['bug',playerBlue1,playerBlue2,playerBlue3,playerBlue4];
+var blueArray = [playerBlue1,playerBlue2,playerBlue3,playerBlue4];
 
 
-var playerRed1 = new PlayerCard("Player1", "pistol", "Red");
-var playerRed2 = new PlayerCard("Player1", "pistol", "Red");
-var playerRed3 = new PlayerCard("Player1", "rifle", "Red");
-var playerRed4 = new PlayerCard("Player1", "sniper", "Red");
+var playerRed1 = new PlayerCard("Ivan", "pistol", "Red");
+var playerRed2 = new PlayerCard("Mihail", "pistol", "Red");
+var playerRed3 = new PlayerCard("Victor", "rifle", "Red");
+var playerRed4 = new PlayerCard("Igor", "sniper", "Red");
 
-var redArray = ['bug',playerRed1,playerRed2,playerRed3,playerRed4];
-
+var redArray = [playerRed1,playerRed2,playerRed3,playerRed4];
+var players = redArray.concat(blueArray)
 //generate card from js objects
 
-var createTag = function(tag,classname,parent,text) {
+var createTag = function(tag,parent,classname1,classname2,text,parentNumber) {
  var element = document.createElement(tag);
- if(classname) {
- element.classList.add(classname);
+ if(classname1) {
+ element.classList.add(classname1);
+ }
+ if(classname2) {
+ element.classList.add(classname2);  
  }
  if(text){
  element.innerHTML = text;
  }
  var container = document.getElementsByClassName(parent);
- for(i=0;i< container.length;i++) {
- container[i].appendChild(element);
-     }
+ if(parentNumber) {
+     container[parentNumber].appendChild(element);   
+ }
+ else {
+ container[0].appendChild(element);
+ }
 };
 
+var createPlayerCard = function(Array,ParentElement) {
+    for(var i=0;i<Array.length;i++) {
+createTag('div',ParentElement,'player-Card');
+createTag('div','player-Card','nameGroup','','',i);
+createTag('div','nameGroup','avatar',"card-avatar","",i);
+createTag('div','nameGroup','card-playerName',"","",i);
+createTag('h4','card-playerName','','',Array[i].playerName,i);
+createTag('div','card-playerName','card-actionPoints',"","",i);
+createTag('h4','card-actionPoints','','',Array[i].ActionPoints,i);
+createTag('div','player-Card','card-playerInfo',"","",i);
+createTag('div','card-playerInfo','card-descGroup',"card-descGroup-gun","",i);
+createTag('h5','card-descGroup-gun','','',"gun",i);
+createTag('p','card-descGroup-gun','','',Array[i].gun,i);
 
+createTag('div','card-playerInfo','card-descGroup',"card-descGroup-status","",i);
+createTag('h5','card-descGroup-status','','',"status",i);
+createTag('p','card-descGroup-status','','',Array[i].status,i);
 
-for(i=1;i < 5 ;i++)
-{    
-createTag('div', 'playerCard', 'container');
-createTag('div', 'Ava-Info', 'playerCard');
-createTag('div', 'Avatar', 'Ava-Info');
-createTag('div', 'Main-Info', 'Ava-Info');
-createTag('div', 'ApGroup', 'Main-Info');
-createTag('span', '', 'ApGroup','AP');
-createTag('h1', '', 'ApGroup',blueArray[i].ActionPoints);
-createTag('h3', 'playerName','Main-Info',blueArray[i].playerName);
-    
-createTag('div', 'param', 'playerCard');
-createTag('div', 'gun-type', 'param'); 
-createTag('span', '', 'gun-type','gun');
-createTag('h3', 'gun-Name', 'gun-type',blueArray[i].gun);
-    
-createTag('div', 'status', 'param');
-createTag('span', '', 'status','stats');
-createTag('h3', 'status-Name', 'status',blueArray[i].status);    
+}
+}
+//create player Cards in one table.
+createPlayerCard(players,"blueTeam");
+Cards = document.getElementsByClassName("player-Card");
+
+//locate redPlayerColumn
+var redColumn = document.getElementsByClassName("redTeam");
+
+//move redplayers to that column
+for(i=4;i<Cards.length;i++){
+redColumn[0].insertBefore(Cards[4],null);
+console.log(Cards[i])
+console.log(redColumn[0])
 }
 
-for(i=1;i < 5 ;i++)
-{    
-createTag('div', 'playerCard', 'container-2');
-createTag('div', 'Ava-Info', 'playerCard');
-createTag('div', 'Avatar', 'Ava-Info');
-createTag('div', 'Main-Info', 'Ava-Info');
-createTag('div', 'ApGroup', 'Main-Info');
-createTag('span', '', 'ApGroup','AP');
-createTag('h1', '', 'ApGroup',redArray[i].ActionPoints);
-createTag('h3', 'playerName','Main-Info',redArray[i].playerName);
-    
-createTag('div', 'param', 'playerCard');
-createTag('div', 'gun-type', 'param'); 
-createTag('span', '', 'gun-type','gun');
-createTag('h3', 'gun-Name', 'gun-type',redArray[i].gun);
-    
-createTag('div', 'status', 'param');
-createTag('span', '', 'status','stats');
-createTag('h3', 'status-Name', 'status',redArray[i].status);    
+//i have status is selected
+//on click toggle class, and update status of object. 
+for(i=0;i<Cards.length;i++){
+    Cards[i].addEventListener("click",function(){
+
+var current = document.getElementsByClassName("player-Card-selected");
+
+  if (current[0] == null) {
+    this.className += " player-Card-selected"; 
+      }
+  else {
+  current[0].className = current[0].className.replace(" player-Card-selected", "");
+  this.className += " player-Card-selected";
+  }
+    })
 }
+
 
 //gunConstructor Object
 function Gun(actionPoints, hitChance, burstRound) {

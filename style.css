@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css?family=Alfa+Slab+One|Raleway:400,700');
+
 * {
     margin: 0;
 }
@@ -11,8 +13,262 @@
     --xl:32px;
     --xxl:44px;
     --xxxl:64px;
+    --gold:#BD8644;
+    --grey:#929487;
+    --dark:#49423A;
+    --red:#DE8462;
+}
+body {
+    display: flex;
+    flex-direction: column;
+    align-items: center
+}
+.backdrop {
+    background: url(Images/Frame.png) no-repeat;
+    opacity: 0.5;
+    width: 1024px;
+    height: 768px;
+}
+h1 {
+font-family: 'Alfa Slab One', cursive;
+font-style: normal;
+font-weight: normal;
+line-height: 80px;
+font-size: 64px;
+}
+h2 {
+font-family: 'Alfa Slab One', cursive;
+font-style: normal;
+font-weight: normal;
+line-height: 56px;
+font-size: 45px;
+color:var(--gold);
+}
+h3 {
+font-family: 'Raleway', sans-serif;
+font-style: normal;
+font-weight: bold;
+line-height: 40px;
+font-size: 32px;
+}
+h4 {
+font-family: 'Raleway', sans-serif;
+font-style: normal;
+font-weight: bold;
+line-height: 24px;
+font-size: 23px;
+color:var(--gold);
+}
+p {
+font-family: 'Raleway', sans-serif;
+font-style: normal;
+font-weight: normal;
+line-height: 24px;
+font-size: 16px;
+}
+
+h5 {
+font-family: Raleway;
+font-style: normal;
+font-weight: normal;
+line-height: 16px;
+font-size: 11px;
+}
+
+.container {
+    width:960px;
+    height: 100%;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-column-gap: 16px;
+    margin: auto;
+    margin-top: 68px;
     
 }
+.playerColumns {
+    margin-top: 16px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-column-gap: 16px;
+}
+.groupName {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.flagIcon {
+    background: url(Images/Flag.svg) no-repeat;
+    width:24px;
+    height: 24px;
+}
+
+.player-Card {
+    margin-top: 4px;
+    box-shadow: 0px 4px 4px rgba(73, 66, 58, 0.15);
+    padding: 14px;
+    border:2px solid white;
+}
+.player-Card-selected {
+    border:2px solid var(--gold);
+}
+.nameGroup {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin-bottom: 16px;
+}
+
+.avatar {
+    background: url(Images/Avatar.png);
+    border: 4px solid var(--gold);
+    border-radius: 100%;
+}
+.card-avatar{
+    width: 56px;
+    height: 56px;
+    margin-right: 16px;
+}
+.card-actionPoints{
+    display: flex;
+    flex-direction: row;
+    align-items: flex-end;
+}
+.card-actionPoints h5 {
+    margin-left: 4px;
+    color:var(--grey);
+}
+
+hr {
+    border: 0px solid var(--gold);
+}
+.card-playerInfo {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-end;
+}
+.card-descGroup {
+    flex-grow: 1;
+}
+.card-descGroup + .car d-descGroup {
+    margin-left: 16px;
+}
+.card-descGroup p {
+    font-weight: 700;
+    color:var(--gold);
+}
+.card-descGroup h5 {
+    color:var(--grey);
+}
+
+.dashboard {
+    background: var(--dark);
+    padding: 32px;
+}
+.dashboard-avatar {
+    background-repeat: no-repeat;
+    background-size: contain;
+    width: 96px;
+    height: 96px;
+    margin-right: 16px;
+}
+.arrow-Icon {
+    width:32px;
+    height: 34px;
+}
+.prevPlayer {
+    background: url(Images/LeftArrow.svg) 0%;
+    margin-right: 9px;
+}
+.nextPlayer {
+    background: url(Images/RightArrow.svg) no-repeat  -2px 0px ;
+    
+}
+.dashboard-header {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin-bottom: 48px;
+}
+.currentPlayer {
+    display:grid;
+    grid-template-columns: 1fr 216px;
+     
+}
+.dashboard-desc {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+.dashboard-desc h4 {
+    margin-right: 12px;
+    color: var(--grey);
+}
+
+.card-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-column-gap: 16px;
+    margin-bottom: 32px;
+}
+.Card {
+    background: white;
+    padding: 16px;
+}
+.card-icon {
+    width: 88px;
+    height: 72px;
+}
+.Run-icon {
+    background: url(Images/Run.svg) no-repeat 50% 100%;
+}
+.Hide-icon {
+    background: url(Images/Hide.svg) no-repeat 50% 100%;
+}
+.Def-icon {
+    background: url(Images/Defend.svg) no-repeat 50% 100%;
+}
+.Fire-icon {
+    background: url(Images/fire.svg) no-repeat 50% 50%;
+}
+.Burst-icon {
+    background: url(Images/burst.svg) no-repeat 50% 50%;
+}
+.MG-icon {
+    background: url(Images/MG.svg) no-repeat 50% 50%;
+    width: 100%;
+    height: 100%;
+}
+.cost-desc {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin-bottom: 16px;
+    margin-top: 8px;
+}
+.cost-desc h4 {
+    margin-right: 4px;
+}
+.btn {
+    padding: 8px 16px;
+    background: var(--gold);
+font-family: Raleway;
+font-style: normal;
+font-weight: bold;
+line-height: 16px;
+font-size: 16px;
+text-align: center;
+text-transform: uppercase;
+color: #FFFFFF;
+
+}
+.Btn-Big {
+padding: 16px;
+background: var(--red);
+font-weight: bold;
+line-height: 24px;
+font-size: 23px;
+}
+/*
 h1 {
     line-height: 28px;
     font-size: 28px;
@@ -25,7 +281,7 @@ h1 {
 .container > div+div ,.container-2  > div+div {
     margin-top: var(--l)
 }
-/* ProductCardStyle */
+ ProductCardStyle 
 .playerCard {
     background: lightgrey;
     flex-basis: content;
@@ -58,4 +314,4 @@ h1 {
 
 .param div+div {
     margin-left: var(--m)
-}
+}*/
