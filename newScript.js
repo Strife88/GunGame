@@ -65,29 +65,27 @@ createTag('h3', 'gun-Name', 'gun-type',blueArray[i].gun);
     
 createTag('div', 'status', 'param');
 createTag('span', '', 'status','stats');
-createTag('h3', 'status-Name', 'status',blueArray[i].status);    
+createTag('h3', 'status-Name', 'status',blueArray[i].status);  
+}
+//get list of player cards in a array
+var playerCardArray =     document.getElementsByClassName("playerCard");
+
+// set each player card ID
+for(i=0;i<playerCardArray.length;i++) {
+    playerCardArray[i].setAttribute("id", "PlayerCard"+(1+i));
+    console.log(playerCardArray);
+};
+
+// add click on player card
+var playerCard; 
+for(i=1;i<5;i++) {
+    playerCard = document.getElementById('playerCard'+i);
+console.log(playerCard);
+
 }
 
-for(i=1;i < 5 ;i++)
-{    
-createTag('div', 'playerCard', 'container-2');
-createTag('div', 'Ava-Info', 'playerCard');
-createTag('div', 'Avatar', 'Ava-Info');
-createTag('div', 'Main-Info', 'Ava-Info');
-createTag('div', 'ApGroup', 'Main-Info');
-createTag('span', '', 'ApGroup','AP');
-createTag('h1', '', 'ApGroup',redArray[i].ActionPoints);
-createTag('h3', 'playerName','Main-Info',redArray[i].playerName);
-    
-createTag('div', 'param', 'playerCard');
-createTag('div', 'gun-type', 'param'); 
-createTag('span', '', 'gun-type','gun');
-createTag('h3', 'gun-Name', 'gun-type',redArray[i].gun);
-    
-createTag('div', 'status', 'param');
-createTag('span', '', 'status','stats');
-createTag('h3', 'status-Name', 'status',redArray[i].status);    
-}
+
+
 
 //gunConstructor Object
 function Gun(actionPoints, hitChance, burstRound) {
@@ -107,7 +105,6 @@ var MoveAction = {
     Defend: 8
 };
 
-//+
 
 
 
