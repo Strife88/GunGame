@@ -86,6 +86,37 @@ for(i=4;i<Cards.length;i++){
 redColumn[0].insertBefore(Cards[4],null);
 }
 
+//targetonDashboard
+var createTargetOption = function(data) {
+var targetList = document.getElementById("targetList")
+var targetOption = document.createElement("option");
+targetList.appendChild(targetOption);
+targetOption.innerHTML = data;
+}
+//removeOptions
+function removeChildren(elem) {
+  while (elem.lastChild) {
+    elem.removeChild(elem.lastChild);
+  }
+}
+
+var createTargetList = function() {
+if(currentSelection !== undefined){
+      removeChildren(targetList);
+if(currentSelection.team == "Blue") {
+    for(i=0;i<redArray.length;i++){
+      createTargetOption(redArray[i].playerName);
+    }
+}
+else if(currentSelection.team == "Red") {
+    for(i=0;i<blueArray.length;i++){
+      createTargetOption(blueArray[i].playerName);
+    } 
+}
+}
+}
+
+
 //i have status is selected
 //on click toggle class, and update status of object.
 //write a variable = selected object data
@@ -112,6 +143,7 @@ for(i=0;i<Cards.length;i++){
   }
      currentSelection = players.find(function(obj) { return obj.isSelected === true; })
      updateDashboard();
+     createTargetList();     
     })
 }
 
@@ -168,8 +200,8 @@ function Gun(actionPoints, hitChance, burstRound) {
     this.burstHitChance = hitChance/burstRound + 10;
 }
 
-var rifle = new Gun("4", "40", 3);
-var pistol = new Gun("3", "30", 3);
+var rifle = new Gun("4", "10", 3);
+var pistol = new Gun("3", "30", 1);
 var sniper = new Gun("8", "70",1);
 
 var MoveAction = {
@@ -218,23 +250,62 @@ return(hit.length);
 //2) remove ActionPoints from rifleObject
 //3) update UI
 
+var hitStats = document.getElementsByClassName("hitStatus")[0].getElementsByTagName("h4")[0];
 
 var fireButton = document.getElementById("FireBtn");
-//onClick fireButon reduce APbasedOnRifleAP, outputHitChance
 
+//onClick fireButon reduce APbasedOnRifleAP, outputHitChance
 fireButton.addEventListener("click",function(){
     if (currentSelection !== undefined) {
         if (currentSelection.ActionPoints >0) {
-        currentSelection.ActionPoints -=4;
-        console.log(currentSelection.ActionPoints);
+        if ("rifle" == currentSelection.gun && currentSelection.ActionPoints >= rifle.ActionPoints) {
+           currentSelection.ActionPoints -=rifle.ActionPoints; if(burst(rifle.burstRound,rifle.hitChance)>0){
+        hitStats.innerHTML = "HIT";
+            }
+            else {
+        hitStats.innerHTML = "MISS";
+}
+        }
+         else if ("pistol" == currentSelection.gun && currentSelection.ActionPoints  >= pistol.ActionPoints) {
+           currentSelection.ActionPoints -=pistol.ActionPoints;  if(burst(pistol.burstRound,rifle.hitChance)>0){
+        hitStats.innerHTML = "HIT";
+            }
+            else {
+        hitStats.innerHTML = "MISS";
+}
+        } 
+        else if ("sniper" == currentSelection.gun && currentSelection.ActionPoints  >= sniper.ActionPoints) {
+           currentSelection.ActionPoints -=sniper.ActionPoints; if(burst(sniper.burstRound,rifle.hitChance)>0){
+        hitStats.innerHTML = "HIT";
+            }
+            else {
+        hitStats.innerHTML = "MISS";
+}
+        }
+        else {
+        hitStats.innerHTML = "No AP";
+}    
         updateDashboard();
         updateCard();
             
             }
+        else {
+        hitStats.innerHTML = "No AP";
+}
     }
+    
     
 })
 
+
+
+//Make list of targets -select with elements loop throu cards 0-3 4-7 based on what is currentSelectCard
+
+
+//If HIT turn list object.AliveStatus = dead
+//On FireClick, check if stats Dead - InnerHtml  to DEAD, change AVA to skull. All text to grey. 
+// On END turn reset the style...
+// Remove Target from List
 
 
 //Selected Player - Class Active

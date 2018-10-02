@@ -244,6 +244,10 @@ hr {
     margin-top: 8px;
     text-align: center; 
 }
+
+h4 + select {
+    margin-top: 16px
+}
 .hitStatus {
     display: flex;
     flex-direction: column;
