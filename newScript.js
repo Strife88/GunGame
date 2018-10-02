@@ -31,7 +31,7 @@ var redArray = [playerRed1,playerRed2,playerRed3,playerRed4];
 var players = redArray.concat(blueArray)
 //generate card from js objects
 
-var createTag = function(tag,parent,classname1,classname2,text,parentNumber) {
+var createTag = function(tag,parent,classname1,classname2,text,parentNumber,idenifier) {
  var element = document.createElement(tag);
  if(classname1) {
  element.classList.add(classname1);
@@ -48,12 +48,15 @@ var createTag = function(tag,parent,classname1,classname2,text,parentNumber) {
  }
  else {
  container[0].appendChild(element);
+ if(idenifier){
+ element.setAttribute("id",idenifier);
+ }
  }
 };
 
 var createPlayerCard = function(Array,ParentElement) {
     for(var i=0;i<Array.length;i++) {
-createTag('div',ParentElement,'player-Card');
+createTag('div',ParentElement,'player-Card',"","","","Player-"+(i));
 createTag('div','player-Card','nameGroup','','',i);
 createTag('div','nameGroup','avatar',"card-avatar","",i);
 createTag('div','nameGroup','card-playerName',"","",i);
@@ -81,26 +84,80 @@ var redColumn = document.getElementsByClassName("redTeam");
 //move redplayers to that column
 for(i=4;i<Cards.length;i++){
 redColumn[0].insertBefore(Cards[4],null);
-console.log(Cards[i])
-console.log(redColumn[0])
 }
 
 //i have status is selected
-//on click toggle class, and update status of object. 
-for(i=0;i<Cards.length;i++){
-    Cards[i].addEventListener("click",function(){
-
-var current = document.getElementsByClassName("player-Card-selected");
-
-  if (current[0] == null) {
-    this.className += " player-Card-selected"; 
+//on click toggle class, and update status of object.
+//write a variable = selected object data
+var currentSelection;
+for(i=0;i<Cards.length;i++){  
+    
+     Cards[i].addEventListener("click",function(){
+         
+         var current = document.getElementsByClassName("player-Card-selected");
+         var number = this.getAttribute("id").slice(-1);
+         if (current[0] == null) {
+             this.className += " player-Card-selected"; 
+        players[number].isSelected = true;
+             
       }
   else {
   current[0].className = current[0].className.replace(" player-Card-selected", "");
   this.className += " player-Card-selected";
+    for(i=0;i< players.length; i++){
+        players[i].isSelected = false;
+    }  
+    players[number].isSelected = true;
+ 
   }
+     currentSelection = players.find(function(obj) { return obj.isSelected === true; })
+     updateDashboard();
     })
 }
+
+//createDinamicDashboard - or i just need to update innerHTML of the dashboard?
+//function(tag,parent,classname1,classname2,text,parentNumber,idenifier)
+
+
+var updateDashboard = function() {
+if (currentSelection !== undefined){
+document.getElementById("dashBoard-Name").innerHTML = currentSelection.playerName;
+document.getElementById("dashBoard-Gun").innerHTML = currentSelection.gun;
+document.getElementById("dashBoard-ActionPoints").innerHTML = currentSelection.ActionPoints;
+    };
+    }
+
+//update the card Action points upon actions
+var htmlCard =document.getElementsByClassName("player-Card-selected");
+var updateCard = function() {
+    htmlCard[0].getElementsByClassName("card-actionPoints")[0].getElementsByTagName("h4")[0].innerHTML = currentSelection.ActionPoints;
+}
+
+var actionButtons = document.getElementsByClassName("Btn-Sm");
+//onClick actionButon reduce AP
+for (i=0;i<actionButtons.length-2;i++) {
+actionButtons[i].addEventListener("click",function(){
+    if (currentSelection !== undefined) {
+        if (currentSelection.ActionPoints >0) {
+        currentSelection.ActionPoints -=4;
+        console.log(currentSelection.ActionPoints);
+        updateDashboard();
+        updateCard();
+            
+            }
+    }
+    
+})
+}
+
+//onClickEndTurn, restartActionPoints
+document.getElementsByClassName("Btn-Big")[0].addEventListener("click",function() {
+    for(i=0;i<players.length;i++) {
+        players[i].ActionPoints =12;
+        updateDashboard();  
+        document.getElementsByClassName("card-actionPoints")[i].getElementsByTagName("h4")[0].innerHTML =players[i].ActionPoints;
+    }
+});
 
 
 //gunConstructor Object
@@ -113,7 +170,7 @@ function Gun(actionPoints, hitChance, burstRound) {
 
 var rifle = new Gun("4", "40", 3);
 var pistol = new Gun("3", "30", 3);
-var sniper = new Gun("6", "60");
+var sniper = new Gun("8", "70",1);
 
 var MoveAction = {
     Run: 4,
@@ -121,7 +178,62 @@ var MoveAction = {
     Defend: 8
 };
 
-//+
+
+//sigleFireFunction
+var fire = function(hitChance) {
+ if (Math.round(Math.random()*100)<= hitChance) {
+   return "hit";
+}
+ else {
+   return "miss";
+ }
+}
+
+//mainFireFunction
+var burst = function(shots,hitChance) {
+var hitArray = [];
+for(i=0;i<shots;i++) {
+  hitArray.push(fire(hitChance));
+}
+
+var hit = [];
+var miss = [];
+for(i=0;i<hitArray.length;i++){
+	var current = hitArray[i]
+	if(current == "miss"){
+    miss.push(current);
+       }
+  else {
+    hit.push(current);
+  }
+  }
+
+return(hit.length);
+}
+
+//onClick of FireKey
+//1) get rifleKey from playerCard
+//2) get rifleObject based on rifleKey
+//2) set Burst hitchance from rifleObject 
+//2) remove ActionPoints from rifleObject
+//3) update UI
+
+
+var fireButton = document.getElementById("FireBtn");
+//onClick fireButon reduce APbasedOnRifleAP, outputHitChance
+
+fireButton.addEventListener("click",function(){
+    if (currentSelection !== undefined) {
+        if (currentSelection.ActionPoints >0) {
+        currentSelection.ActionPoints -=4;
+        console.log(currentSelection.ActionPoints);
+        updateDashboard();
+        updateCard();
+            
+            }
+    }
+    
+})
 
 
 
@@ -134,7 +246,7 @@ var MoveAction = {
 
 // A
 // On click move/hide/defence
-// decrease AP from selected player.
+// decrease AP from selected player. - DONE
 
 //B
 // select target

@@ -35,11 +35,11 @@
                 <div class="avatar dashboard-avatar"></div>
                 <div class="dashboard-playerInfo">
                     <div class="dashboard-playerName">
-                        <h2>Tom</h2>
+                        <h2  id="dashBoard-Name">Choose</h2>
                     </div>
                     <div class="dashboard-desc">
-                        <h4>Rifle</h4>
-                        <h4>12 AP</h4>
+                        <h4 id="dashBoard-Gun"></h4>
+                        <h4 id="dashBoard-ActionPoints"></h4>
                     </div>    
                     <div class="dashboard-desc"></div>
                 </div>
@@ -75,9 +75,9 @@
 
             </div>
             <div class="card-row">
-                <div>
+                <div class="hitStatus">
                     <div class="MG-icon full-span"></div>
-                    
+                    <h4>Hit</h4>
                     
                 </div>
               <div class="move Card">
@@ -86,15 +86,15 @@
                         <h4>4</h4>
                         <h5>Action points</h5>
                     </div>
-                    <div class="btn Btn-Sm">Fire</div>
+                    <div class="btn Btn-Sm" id="FireBtn">Fire</div>
                 </div>
-              <div class="move Card">
+              <div class="move Card" style="display: none !important">
                     <div class="card-icon Burst-icon"></div>
                     <div class="cost-desc">
                         <h4>4</h4>
                         <h5>Action points</h5>
                     </div>
-                    <div class="btn Btn-Sm">Burst</div>
+                    <div class="btn Btn-Sm" id="BurstBtn">Burst</div>
                 </div>
 
             </div>
